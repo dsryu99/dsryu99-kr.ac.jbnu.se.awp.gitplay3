@@ -48,6 +48,7 @@ public class MemberController {
 				vo.setUserPass(pwd);
 				
 				service.register(vo);
+
 			}
 		}catch(Exception e) {
 			throw new RuntimeException();
@@ -67,6 +68,7 @@ public class MemberController {
 		
 		if(login != null && pwdMatch == true) {
 			session.setAttribute("member", login);
+			return "redirect:/board/list";
 		}else {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
