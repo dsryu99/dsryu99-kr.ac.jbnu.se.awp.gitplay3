@@ -15,17 +15,27 @@
 		$(document).ready(function(){
 			var formObj = $("form[name='form']");
 			
-			// 헌혈 확정
+			// 예약 확정
 			$(".confirm_btn").on("click", function(){
 				formObj.attr("action", "/reservation/confirm");
 				formObj.attr("method", "post");
 				formObj.submit();				
 			});
 			
+			// 예약 취소
+			$(".delete_btn").on("click", function(){
+				var deleteYN = confirm("예약 취소하시겠습니까?");
+				if(deleteYN == true){
+					formObj.attr("action", "/reservation/delete");
+					formObj.attr("method", "post");
+					formObj.submit();
+				}
+			});
+			
 		})
 	</script>
 	 
-	 	<title>게시판</title>
+	<title>게시판</title>
 	</head>
 	<body>
 		<div class="container">
@@ -41,19 +51,14 @@
 			<section id="container">
 				<form role="form" method="post">
 					<c:if test="${member.userId != null}">
-
 					<table class="table table-hover">
-
 						<thead>
-							<tr><th>번호</th><th>게시글</th><th>작성자</th><th>등록일</th><th>환자이름</th><th>의료기관</th><th>필요혈액</th><th>예약날짜</th><th>헌혈완료</th></tr>
+							<tr><th>번호</th><th>게시글</th><th>작성자</th><th>등록일</th><th>환자이름</th><th>의료기관</th><th>필요혈액</th><th>예약날짜</th><th>예약현황</th><th>예약취소</th></tr>
 						</thead>
-						
 						<c:forEach items="${reslist}" var = "reslist">
 							<c:if test="${member.userId == reslist.userId}">
 							<tr>
-							
 								<td><c:out value="${reslist.bno}" /></td>
-								
 								<td><a href="/board/readView?bno=${reslist.bno}">${reslist.title}</a></td>
 								<td><c:out value="${reslist.writer}" /></td>
 								<td><fmt:formatDate value="${reslist.regdate}" pattern="yyyy-MM-dd"/></td>
@@ -63,21 +68,22 @@
 								<td><c:out value="${reslist.resDate}" /></td>
 								
 								<c:if test ="${reslist.confirm == 0}">
-								<td><button type="button" class="confirm_btn btn btn-warning" onclick = "location.href='/reservation/confirm?bno=${reslist.bno}'">확정</button></td>
+									<td><button type="button" class="confirm_btn btn btn-warning" onclick = "location.href='/reservation/confirm?bno=${reslist.bno}'">확정</button></td>
+									<td><button type="button" class="delete_btn btn btn-danger" onclick = "location.href='/reservation/delete?bno=${reslist.bno}'">취소</button></td>
 								</c:if>
 								<c:if test ="${reslist.confirm == 1}">
-								<td><button type="button" class="btn btn-primary">완료</button></td>
+									<td><button type="button" class="btn btn-primary">완료</button></td>
+									<td></td>
 								</c:if>
 							</tr>
 							</c:if>
 						</c:forEach>
-						
 					</table>
-					
 					</c:if>
-							<c:if test="${member.userId == null}">
-								<p>로그인 후에 작성하실 수 있습니다.</p>
-							</c:if>
+					
+					<c:if test="${member.userId == null}">
+						<p>로그인 후에 확인하실 수 있습니다.</p>
+					</c:if>
 				</form>
 			</section>
 		</div>

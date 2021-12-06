@@ -15,7 +15,7 @@
 	<body>
 		<div class="container">
 			<header>
-				<h1>받은 헌혈 예약 목록</h1>
+				<h1>예약받은 목록</h1>
 			</header>
 			<hr />
 			 
@@ -26,19 +26,14 @@
 			<section id="container">
 				<form role="form" method="get">
 					<c:if test="${member.userId != null}">
-
 					<table class="table table-hover">
-
 						<thead>
-							<tr><th>번호</th><th>게시글</th><th>작성자</th><th>등록일</th><th>환자이름</th><th>의료기관</th><th>필요혈액</th><th>예약날짜</th><th>헌혈완료</th></tr>
+							<tr><th>번호</th><th>게시글</th><th>작성자</th><th>등록일</th><th>환자이름</th><th>의료기관</th><th>필요혈액</th><th>예약날짜</th><th>예약현황</th></tr>
 						</thead>
-						
 						<c:forEach items="${reslist}" var = "reslist">
 							<c:if test="${member.userId == reslist.writer}">
 							<tr>
-							
 								<td><c:out value="${reslist.bno}" /></td>
-								
 								<td><a href="/board/readView?bno=${reslist.bno}">${reslist.title}</a></td>
 								<td><c:out value="${reslist.writer}" /></td>
 								<td><fmt:formatDate value="${reslist.regdate}" pattern="yyyy-MM-dd"/></td>
@@ -47,20 +42,19 @@
 								<td><c:out value="${reslist.bloodtype} ${reslist.donationtype}" /></td>
 								<td><c:out value="${reslist.resDate}" /></td>
 								<c:if test ="${reslist.confirm == 0}">
-								<td>미완료</td>
+									<td>미완료</td>
 								</c:if>
 								<c:if test ="${reslist.confirm == 1}">
-								<td>완료</td>
+									<td>완료</td>
 								</c:if>
 							</tr>
 							</c:if>
 						</c:forEach>
-						
 					</table>
 					
 					</c:if>
 							<c:if test="${member.userId == null}">
-								<p>로그인 후에 작성하실 수 있습니다.</p>
+								<p>로그인 후에 확인하실 수 있습니다.</p>
 							</c:if>
 				</form>
 			</section>

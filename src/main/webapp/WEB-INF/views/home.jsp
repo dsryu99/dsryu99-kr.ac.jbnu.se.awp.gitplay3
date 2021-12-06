@@ -75,59 +75,35 @@ body>.grid {
 		$("#registerBtn").on("click", function() {
 			location.href = "member/register";
 		})
-
 		$("#memberUpdateBtn").on("click", function() {
 			location.href = "member/memberUpdateView";
 		})
-
+		$("#memberDeleteBtn").on("click", function(){
+			location.href = "member/memberDeleteView";
+		})
+		$("#boardBtn").on("click", function(){
+			location.href = "board/list";
+		})
 	})
 </script>
 <body>
-	<!-- 
-		<form name='homeForm' id="login"  method="post" action="/member/login">
-	<a href="/board/list">게시판</a><br/>
-		<c:if test="${member == null}">
-			<div>
-				<label for="userId"></label>
-				<input type="text" id="userId" name="userId">
-			</div>
-			<div>
-				<label for="userPass"></label>
-				<input type="password" id="userPass" name="userPass">
-			</div>
-			<div>
-				<button type="submit">로그인</button>
-				<button id="registerBtn" type="button">회원가입</button>
-			</div>
-		</c:if>
-		<c:if test="${member != null }">
-			<div>
-				<p>${member.userId}님 환영 합니다.</p>
-				<button id="memberUpdateBtn" type="button">회원정보수정</button>
-				<button id="logoutBtn" type="button">로그아웃</button>
-			</div>
-		</c:if>
-		<c:if test="${msg == false}">
-			<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
-		</c:if>
-	</form>
-	 -->
-
 	<div class="ui middle aligned center aligned grid">
 	
 		<div class="column">
 		<c:choose>
-				<c:when test="${member != null }">
-					<div>
-					<i class="fas fa-tint"></i><br>
-					<h2 class="title">지정 헌혈 게시판</h2>
-						<div class="ui stacked segment">
-						<p id="memberMsg">${member.userId}님환영합니다.</p>
-						<button  class="ui fluid large red submit button" id="memberUpdateBtn" type="button">회원정보수정</button>
-						<button  class="ui fluid large red submit button" id="logoutBtn" type="button" id = "logoutbtn">로그아웃</button>
-					</div>
-					</div>
-				</c:when>
+			<c:when test="${member != null }">
+				<div>
+				<i class="fas fa-tint"></i><br>
+				<h2 class="title">지정 헌혈 게시판</h2>
+				<div class="ui stacked segment">
+					<p id="memberMsg">${member.userId}님 환영합니다.</p>
+					<button class="ui fluid large red submit button" id="boardBtn">게시판</button><p></p>
+					<button class="ui fluid large red submit button" id="memberUpdateBtn" type="button">회원정보수정</button>
+					<button class="ui fluid large red submit button" id="logoutBtn" type="button">로그아웃</button><p></p>
+					<button class="ui fluid large red submit button" id="memberDeleteBtn" type="button">회원탈퇴</button>
+				</div>
+				</div>
+			</c:when>
 			
 			<c:otherwise>
 			<i class="fas fa-tint"></i>
@@ -152,17 +128,17 @@ body>.grid {
 						id="login_btn">로그인</button>
 				</div>
 				<div class="ui error message"></div>
-
 			</form>
 			<div class="ui message">
 				로그인 할 계정이 없다면 <a href="member/register">여기</a>를 눌러주세요.		
 			</div> 
 				<a href="/board/list">게시판 바로가기</a>
 			</c:otherwise>
-			</c:choose>
+		</c:choose>
+			
 			<c:if test="${msg == false}">
-				<br>
-				<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
+				<br><br>
+				<p style="color: red;">로그인 실패! 아이디와 비밀번호를 확인해주세요.</p>
 			</c:if>
 		</div>
 	</div>

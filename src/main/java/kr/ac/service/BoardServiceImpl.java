@@ -27,10 +27,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	// 게시물 목록 조회
-		public int listCount(SearchCriteria scri) throws Exception {
+	public int listCount(SearchCriteria scri) throws Exception {
 
-			return dao.listCount(scri);
-		}
+		return dao.listCount(scri);
+	}
 	
 	// 게시물 목록 조회
 	@Override

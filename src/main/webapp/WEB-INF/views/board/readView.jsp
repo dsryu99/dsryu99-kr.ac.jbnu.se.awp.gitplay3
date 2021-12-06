@@ -27,38 +27,32 @@
 			
 			// 삭제
 			$(".delete_btn").on("click", function(){
-				
 				var deleteYN = confirm("삭제하시겠습니까?");
-				if(deleteYN == true){
-					
-				formObj.attr("action", "/board/delete");
-				formObj.attr("method", "post");
-				formObj.submit();
-					
+				if(deleteYN == true){	
+					formObj.attr("action", "/board/delete");
+					formObj.attr("method", "post");
+					formObj.submit();
 				}
 			});
 			
 			//예약
 			$(".reservation_btn").on("click", function(){
-				
-				var resYN = confirm("예약 하시겠습니까?");
-				
+				var resYN = confirm("예약하시겠습니까?");
 				if(resYN == true){
-				formObj.attr("action", "/reservation/write");
-				formObj.attr("method", "post");
-				formObj.submit();	
+					formObj.attr("action", "/reservation/write");
+					formObj.attr("method", "post");
+					formObj.submit();	
 				}
-				
 			});
 			
 			// 목록
 			$(".list_btn").on("click", function(){
-				
 				location.href = "/board/list?page=${scri.page}"
 						      +"&perPageNum=${scri.perPageNum}"
 						      +"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 			});
 			
+			//댓글 작성 View
 			$(".replyWriteBtn").on("click", function(){
 				var formObj = $("form[name='replyForm']");
 				formObj.attr("action", "/board/replyWrite");
@@ -123,9 +117,8 @@
 					<label for="title" class="col-sm-2 control-label">제목</label>
 					<input type="text" id="title" name="title" class="form-control" value="${read.title}" readonly="readonly" />
 				</div>
-				<!-- 추가 사항 -->
 				<div class="form-group">
-					<label for="bloodtype" class="col-sm-2 control-label">필요 혈액</label>
+					<label for="bloodtype" class="col-sm-2 control-label">필요혈액</label>
 					<input type="text" id="bloodtype" name="bloodtype" class="form-control" value="${read.bloodtype} ${read.donationtype}" readonly="readonly" >
 				</div>
 				<div class="form-group">
@@ -145,15 +138,14 @@
 					<input type="text" id="cellNum" name="cellNum" class="form-control" value="${read.cellNum}" readonly="readonly" >
 				</div>
 				<div class="form-group">
-					<label for="resDate" class="col-sm-2 control-label">필요 날짜</label>
-					<input type="text" id="reaDate" name="resDate" class="form-control" value="${read.resDate}" readonly="readonly" >
+					<label for="resDate" class="col-sm-2 control-label">필요날짜</label>	
+					<input type="date" id="reaDate" name="resDate" class="form-control" value="${read.resDate}" readonly="readonly" >
 				</div>
 				<div class="form-group">
 					<label for="amount" class="col-sm-2 control-label">필요수량</label>
 					<input type="text" id="amount" name="amount" class="form-control" value="${read.amount}" readonly="readonly" >
 				</div>
 					
-				
 				<div class="form-group">
 					<label for="content" class="col-sm-2 control-label">내용</label>
 					<textarea id="content" name="content" class="form-control" readonly="readonly"><c:out value="${read.content}" /></textarea>
@@ -168,12 +160,19 @@
 				</div>
 								
 				<div>
+				
 				<c:if test="${member.userId != null}">
-					<button type="button" class="update_btn btn btn-warning">수정</button>
-					<button type="button" class="delete_btn btn btn-danger">삭제</button>
-					<button type="button" class="list_btn btn btn-primary">목록</button>
-					<button type="button" class="reservation_btn btn btn-success">예약</button>
+					<c:if test="${member.userId == read.writer}">
+						<button type="button" class="update_btn btn btn-warning">수정</button>
+						<button type="button" class="delete_btn btn btn-danger">삭제</button>
+						<button type="button" class="list_btn btn btn-primary">목록</button>
+					</c:if>
+					<c:if test="${member.userId != read.writer}">
+						<button type="button" class="list_btn btn btn-primary">목록</button>
+						<button type="button" class="reservation_btn btn btn-success">예약</button>
+					</c:if>
 				</c:if>
+				
 				</div>
 				
 				<!-- 댓글 -->
@@ -183,7 +182,7 @@
 							<li>
 								<p>
 								작성자 : ${replyList.writer}<br />
-								작성 날짜 :  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" />
+								작성날짜 :  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" />
 								</p>
 								  
 								<p>${replyList.content}</p>
@@ -204,14 +203,14 @@
 					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 				
 					<div class="form-group">
-						<label for="writer" class="col-sm-2 control-label">댓글 작성자</label>
+						<label for="writer" class="col-sm-2 control-label">댓글작성자</label>
 						<div class="col-sm-10">
 							<input type="text" id="writer" name="writer" class="form-control" />
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="content" class="col-sm-2 control-label">댓글 내용</label>
+						<label for="content" class="col-sm-2 control-label">댓글내용</label>
 						<div class="col-sm-10">
 							<input type="text" id="content" name="content" class="form-control"/>
 						</div>

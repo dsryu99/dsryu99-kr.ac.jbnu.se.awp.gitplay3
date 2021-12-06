@@ -38,27 +38,45 @@
 				}
 			}
 		}
-			function add() {
-				amount = document.updateForm.amount;
-				
-				amount.value++;
-			}
+		
+		function add() {
+			amount = document.updateForm.amount;		
+			amount.value++;
+		}
 			
-			function del() {
-				amount = document.updateForm.amount;
-				
-				if(amount.value > 1){
-					amount.value--;
-				}
+		function del() {
+			amount = document.updateForm.amount;		
+			if(amount.value > 1){
+				amount.value--;
 			}
+		}
 		
-		
+		function checked() {
+			$("input[name='bloodtype']").each(function(){
+		  		  var thisVal = $(this).val();
+		  		  if(thisVal.length > 0){
+		  			  $(this).attr("checked", true);
+		  		  }
+		  	});
+			$("input[name='bloodtypeRH']").each(function(){
+		  		  var thisVal = $(this).val();
+		  		  if(thisVal.length > 0){
+		  			  $(this).attr("checked", true);
+		  		  }
+		  	});
+			$("input[name='donationtype']").each(function(){
+		  		  var thisVal = $(this).val();
+		  		  if(thisVal.length > 0){
+		  			  $(this).attr("checked", true);
+		  		  }
+		  	});
+		}
 	</script>
-	<body>
+	<body onload='javascript:checked();'>
 	
 		<div id="root">
 			<header>
-				<h1> 게시판</h1>
+				<h1>게시판</h1>
 			</header>
 			<hr />
 			 <div>
@@ -73,28 +91,28 @@
 						<tbody>
 							<tr>
 								<td>
-									<label for="title">제목</label><input type="text" id="title" name="title" value="${update.title}" class="chk" title="제목을 입력하세요."/>
+									<label for="title">제목</label>
+									<input type="text" id="title" name="title" value="${update.title}" class="chk" title="제목을 입력하세요."/>
 								</td>
 							</tr>
 							<tr>
-									<td>
-										혈핵형<br>
-										<input type = 'checkbox' name = 'bloodtype' value = 'A'/>A 
-										<input type = 'checkbox' name = 'bloodtype' value = 'B'/>B 
-										<input type = 'checkbox' name = 'bloodtype' value = 'AB'/>AB 
-										<input type = 'checkbox' name = 'bloodtype' value = 'O'/>O <br>
-										RH-일 경우 선택하세요. <input type = 'checkbox' name = 'bloodtypeRH' value = 'RH-'/>
-									</td>
-									
-								</tr>
+								<td>
+									혈핵형<br>
+									<input type = 'radio' name = 'bloodtype' value='A'/>A 
+									<input type = 'radio' name = 'bloodtype' value='B'/>B 
+									<input type = 'radio' name = 'bloodtype' value='AB'/>AB 
+									<input type = 'radio' name = 'bloodtype' value='O'/>O <br>
+									RH-일 경우 선택하세요. <input type = 'checkbox' name = 'bloodtypeRH' value='RH-'/>
+								</td>	
+							</tr>
 								<tr>
 									<td>
 										필요한 헌혈의 종류<br>
-										<input type = 'checkbox' name = 'donationtype' value = '전혈'/>전혈 
-										<input type = 'checkbox' name = 'donationtype' value = '성분채혈 혈소판'/>성분채혈 혈소판 
-										<input type = 'checkbox' name = 'donationtype' value = '성분채혈 백혈구'/>성분채혈 백혈구 
-										<input type = 'checkbox' name = 'donationtype' value = '농축적혈구'/>농축적혈구
-										<input type = 'checkbox' name = 'donationtype' value = '백혈구여과제거적혈구'/>백혈구여과제거적혈구 <br>
+										<input type = 'radio' name = 'donationtype' value = '전혈'/>전혈 
+										<input type = 'radio' name = 'donationtype' value = '성분채혈 혈소판 '/>성분채혈 혈소판 
+										<input type = 'radio' name = 'donationtype' value = '성분채혈 백혈구'/>성분채혈 백혈구 
+										<input type = 'radio' name = 'donationtype' value = '농축적혈구'/>농축적혈구
+										<input type = 'radio' name = 'donationtype' value = '백혈구여과제거적혈구'/>백혈구여과제거적혈구 <br>
 									</td>
 									
 								</tr>
@@ -109,42 +127,50 @@
 								
 								<tr>
 									<td>
-										<label for="patientName">환자성명</label><input type="text" id="patientName" name="patientName" value="${update.patientName}" class="chk" title="환자 성명을 입력하세요" />
+										<label for="patientName">환자성명</label>
+										<input type="text" id="patientName" name="patientName" value="${update.patientName}" class="chk" title="환자 성명을 입력하세요" />
 									</td>
 								<tr>
 								<tr>
 									<td>
-										<label for="patientNum">환자등록번호</label><input type="text" id="patientNum" name="patientNum" value="${update.patientNum}" class="chk" title="환자 등록번호를 입력하세요."/>
+										<label for="patientNum">환자등록번호</label>
+										<input type="text" id="patientNum" name="patientNum" value="${update.patientNum}" class="chk" title="환자 등록번호를 입력하세요."/>
 									</td>
 								<tr>
 								<tr>
 									<td>
-										<label for="hospital">의료기관</label><input type="text" id="hospital" name="hospital" class="chk" value="${update.hospital}" title="의료기관을 입력하세요."/>
+										<label for="hospital">의료기관</label>
+										<input type="text" id="hospital" name="hospital" class="chk" value="${update.hospital}" title="의료기관을 입력하세요."/>
 									</td>
 								<tr>
 								<tr>
 									<td>
-										<label for="roomNum">병실호수</label><input type="text" id="roomNum" name="roomNum" value="${update.roomNum}"  class="chk" title="병실 호수 입력하세요."/>
+										<label for="roomNum">병실호수</label>
+										<input type="text" id="roomNum" name="roomNum" value="${update.roomNum}"  class="chk" title="병실 호수 입력하세요."/>
 									</td>
 								<tr>
 								<tr>
 									<td>
-										<label for="cellNum">연락처</label><input type="text" id="cellNum" name="cellNum" value="${update.cellNum}" class="chk" title="연락처를 입력하세요."/>
+										<label for="cellNum">연락처</label>
+										<input type="text" id="cellNum" name="cellNum" value="${update.cellNum}" class="chk" title="연락처를 입력하세요."/>
 									</td>
 								<tr>
 								<tr>
 									<td>
-										<label for="resDate">필요한 날짜</label><input type="text" id="resDate" name="resDate" value="${update.resDate}" class="chk" title="필요한 날짜를 입력하세요."/>
+										<label for="resDate">필요한 날짜</label>
+										<input type="date" id="resDate" name="resDate" value="${update.resDate}" class="chk" title="필요한 날짜를 입력하세요."/>
 									</td>
 								<tr>
 							<tr>
 								<td>
-									<label for="content">내용</label><textarea id="content" name="content" class="chk" title="내용을 입력하세요."><c:out value="${update.content}" /></textarea>
+									<label for="content">내용</label>
+									<textarea id="content" name="content" class="chk" title="내용을 입력하세요."><c:out value="${update.content}" /></textarea>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="writer">작성자</label><input type="text" id="writer" name="writer" value="${update.writer}" readonly="readonly"/>
+									<label for="writer">작성자</label>
+									<input type="text" id="writer" name="writer" value="${update.writer}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>

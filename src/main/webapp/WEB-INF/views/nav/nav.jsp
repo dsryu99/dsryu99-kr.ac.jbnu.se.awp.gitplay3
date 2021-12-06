@@ -11,7 +11,7 @@
 		<c:if test="${member == null}"><a href="/">로그인</a></c:if>
 	</li>
 	<li><a href="/reservation/resList">내 예약목록</a></li>
-	<li><a href="/reservation/receivedResList">빋은 헌혈 예약 목록</a></li>
+	<li><a href="/reservation/receivedResList">예약받은 목록</a></li>
 	<li>
 		<c:if test="${member != null}">
 			<p>${member.userId}님 안녕하세요.</p>

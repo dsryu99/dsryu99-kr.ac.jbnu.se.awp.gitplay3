@@ -18,46 +18,37 @@ public class ReservationDAOImpl implements ReservationDAO {
 	
 	@Override
 	public void write(ReservationVO ReservationVO) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.insert("reservationMapper.insert", ReservationVO);
-
 	}
 
 	@Override
 	public List<ReservationVO> list() throws Exception {
-		// TODO Auto-generated method stub
+		return sqlSession.selectList("reservationMapper.listPage");
+	}
+	
+	@Override
+	public List<ReservationVO> receivedList() throws Exception {
 		return sqlSession.selectList("reservationMapper.listPage");
 	}
 
 	@Override
 	public int listCount(SearchCriteria scri) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("reservationMapper.listCount", scri);
 	}
 
 	@Override
 	public ReservationVO read(int bno) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("reservationMapper.read", bno);
+	}
+	
+	@Override
+	public void confirm(int bno) throws Exception {
+		sqlSession.update("reservationMapper.confirm", bno);
 	}
 
 	@Override
 	public void delete(int bno) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.delete("reservationMapper.delete", bno);
 	}
-
-	@Override
-	public List<ReservationVO> receivedList() throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("reservationMapper.listPage");
-	}
-
-	@Override
-	public void confirm(int bno) throws Exception {
-		// TODO Auto-generated method stub
-		sqlSession.delete("reservationMapper.confirm", bno);
-	}
-
-
+	
 }
