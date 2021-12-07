@@ -38,13 +38,13 @@ public class BoardController {
 	@Inject
 	ReservationService reservationService;
 	
-	// 게시판 글 작성 get
+	// 寃뚯떆�뙋 湲� �옉�꽦 get
 	@RequestMapping(value = "/writeView", method = RequestMethod.GET)
 	public void writeView() throws Exception {
 		logger.info("writeView");
 	}
 
-	// 게시판 글 작성 post
+	// 寃뚯떆�뙋 湲� �옉�꽦 post
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String write(BoardVO boardVO, 
 			@RequestParam(value = "bloodtype") String bloodtype, 
@@ -64,7 +64,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	// 게시판 글 조회
+	// 寃뚯떆�뙋 湲� 議고쉶
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
 	public String read(BoardVO boardVO, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
 		logger.info("read");
@@ -78,7 +78,7 @@ public class BoardController {
 		return "board/readView";
 	}
 
-	// 게시판 목록 조회
+	// 寃뚯떆�뙋 紐⑸줉 議고쉶
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 		logger.info("list");
@@ -95,7 +95,7 @@ public class BoardController {
 
 	}
 
-	// 게시판 수정뷰
+	// 寃뚯떆�뙋 �닔�젙酉�
 	@RequestMapping(value = "/updateView", method = RequestMethod.GET)
 	public String updateView(BoardVO boardVO, @ModelAttribute("scri") SearchCriteria scri, Model model)
 			throws Exception {
@@ -107,7 +107,7 @@ public class BoardController {
 		return "board/updateView";
 	}
 
-	// 게시판 수정
+	// 寃뚯떆�뙋 �닔�젙
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(BoardVO boardVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr, 
 			@RequestParam(value = "bloodtype") String bloodtype, 
@@ -134,7 +134,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 
-	// 게시판 삭제 및 예약 있으면 삭제
+	// 寃뚯떆�뙋 �궘�젣 諛� �삁�빟 �엳�쑝硫� �궘�젣
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String delete(BoardVO boardVO, ReservationVO reservationVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr)
 			throws Exception {
@@ -151,7 +151,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	//댓글 작성
+	//�뙎湲� �옉�꽦
 	@RequestMapping(value="/replyWrite", method = RequestMethod.POST)
 	public String replyWrite(ReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 		logger.info("reply Write");
@@ -167,7 +167,7 @@ public class BoardController {
 		return "redirect:/board/readView";
 	}
 		
-	//댓글 수정 GET
+	//�뙎湲� �닔�젙 GET
 	@RequestMapping(value="/replyUpdateView", method = RequestMethod.GET)
 	public String replyUpdateView(ReplyVO vo, SearchCriteria scri, Model model) throws Exception {
 		logger.info("reply Write");
@@ -178,7 +178,7 @@ public class BoardController {
 		return "board/replyUpdateView";
 	}
 		
-	//댓글 수정 POST
+	//�뙎湲� �닔�젙 POST
 	@RequestMapping(value="/replyUpdate", method = RequestMethod.POST)
 	public String replyUpdate(ReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 		logger.info("reply Write");
@@ -194,7 +194,7 @@ public class BoardController {
 		return "redirect:/board/readView";
 	}
 
-	//댓글 삭제 GET
+	//�뙎湲� �궘�젣 GET
 	@RequestMapping(value="/replyDeleteView", method = RequestMethod.GET)
 	public String replyDeleteView(ReplyVO vo, SearchCriteria scri, Model model) throws Exception {
 		logger.info("reply Write");
@@ -205,7 +205,7 @@ public class BoardController {
 		return "board/replyDeleteView";
 	}
 		
-	//댓글 삭제 POST
+	//�뙎湲� �궘�젣 POST
 	@RequestMapping(value="/replyDelete", method = RequestMethod.POST)
 	public String replyDelete(ReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 		logger.info("reply Write");

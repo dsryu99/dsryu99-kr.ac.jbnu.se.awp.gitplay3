@@ -71,8 +71,21 @@
 		#title {
 			width: 50rem;
 			height: 2em;
-
-	}
+		
+		
+		}
+		
+		.devider {
+			background-color:red;
+			height: 2px;
+			margin-top:5em;
+		}
+		
+		.devider2 {
+			background-color:red;
+			height: 2px;
+			margin-top:1em;
+		}
 
 </style>
 	 	
@@ -194,7 +207,7 @@
 					<br><label style = "font-size:2em; margin-left:1em;" class = "pull-left">${read.title}</label><br>
 					
 					<br><div class = "pull-left" style = "margin-left:3em;">
-						<label style = "padding-right: 10px; border-right:2px solid #d2d2d2;">${read.writer}</label>
+						<label style = "padding-right: 10px; border-right:2px solid #F2F2F2;">${read.writer}</label>
 						<label style = "margin-left:0.3em; margin-right:0.2em;" for="regdate">작성날짜:</label>
 						<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd" />	
 					</div>
@@ -241,124 +254,73 @@
 							<button type="button" id = "list_btn" class="ui submit blue button">목록</button>
 						</c:if>
 						<c:if test="${member.userId != read.writer}">
+						<div>
 							<button type="button" id = "list_btn" class="ui submit blue button">목록</button>
 							<button type="button" id = "reservation_btn" class="ui submit green button">예약</button>
+						</div>
 						</c:if>
 					</c:if>
 				</div>
-					
-							
-				</div>
-				
-				<!-- 
-				
-				<div class="form-group">
-					<label for="bloodtype" class="col-sm-2 control-label">필요혈액</label>
-					<input type="text" id="bloodtype" name="bloodtype" class="form-control" value="${read.bloodtype} ${read.donationtype}" readonly="readonly" >
-				</div>
-				<div class="form-group">
-					<label for="bloodtype" class="col-sm-2 control-label">환자성명</label>
-					<input type="text" id="patientName" name="patientName" class="form-control" value="${read.patientName} (환자등록번호 ${read.patientNum})" readonly="readonly" >
-				</div>
-				<div class="form-group">
-					<label for="hospital" class="col-sm-2 control-label">의료기관</label>
-					<input type="text" id="hospital" name="hospital" class="form-control" value="${read.hospital}" readonly="readonly" >
-				</div>
-				<div class="form-group">
-					<label for="roomNum" class="col-sm-2 control-label">병실호수</label>
-					<input type="text" id="roomNum" name="roomNum" class="form-control" value="${read.roomNum}" readonly="readonly" >
-				</div>
-				<div class="form-group">
-					<label for="cellNum" class="col-sm-2 control-label">연락처</label>
-					<input type="text" id="cellNum" name="cellNum" class="form-control" value="${read.cellNum}" readonly="readonly" >
-				</div>
-				<div class="form-group">
-					<label for="resDate" class="col-sm-2 control-label">필요날짜</label>	
-					<input type="date" id="reaDate" name="resDate" class="form-control" value="${read.resDate}" readonly="readonly" >
-				</div>
-				<div class="form-group">
-					<label for="amount" class="col-sm-2 control-label">필요수량</label>
-					<input type="text" id="amount" name="amount" class="form-control" value="${read.amount}" readonly="readonly" >
-				</div>
-					
-				<div class="form-group">
-					<label for="content" class="col-sm-2 control-label">내용</label>
-					<textarea id="content" name="content" class="form-control" readonly="readonly"><c:out value="${read.content}" /></textarea>
-				</div>
-				<div class="form-group">
-					<label for="writer" class="col-sm-2 control-label">작성자</label>
-					<input type="text" id="writer" name="writer" class="form-control" value="${read.writer}"  readonly="readonly"/>
-				</div>
-				<div class="form-group">
-					<label for="regdate" class="col-sm-2 control-label">작성날짜</label>
-					<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd" />	
-				</div> -->
-					
-					
-								
-			<!--<div>
-					<c:if test="${member.userId != null}">
-						<c:if test="${member.userId == read.writer}">
-							<button type="button" class="update_btn btn btn-warning">수정</button>
-							<button type="button" class="delete_btn btn btn-danger">삭제</button>
-							<button type="button" class="list_btn btn btn-primary">목록</button>
-						</c:if>
-						<c:if test="${member.userId != read.writer}">
-							<button type="button" class="list_btn btn btn-primary">목록</button>
-							<button type="button" class="reservation_btn btn btn-success">예약</button>
-						</c:if>
-					</c:if>
-				</div>
-				  -->	
-				
-				
+				<hr class = "devider">
 				<!-- 댓글 -->
-				<!--  <div id="reply">
+				 <div>
+				 	<hr>
 					<ol class="replyList">
 						<c:forEach items="${replyList}" var="replyList">
 							<li>
-								<p>
-								작성자 : ${replyList.writer}<br />
-								작성날짜 :  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" />
-								</p>
-								  
-								<p>${replyList.content}</p>
-								<div>
-									<button type="button" class="replyUpdateBtn btn btn-warning" data-rno="${replyList.rno}">수정</button>
-									<button type="button" class="replyDeleteBtn btn btn-danger" data-rno="${replyList.rno}">삭제</button>
+							 <div id="reply" style = "position:relative; height:5em;">
+								<div id="reply" class = "pull-left">
+								<p style = "font-weight:bold;">작성자 : ${replyList.writer}</p>
 								</div>
+								<div style = "font-weight:bold; margin-right:2em;" id="reply" class = "pull-right" >
+								작성날짜 :  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd"/>
+								</div><br>
+								<c:if test="${member.userId == replyList.writer}">
+								 <div style = "margin-right:1.2em; margin-top:1em;" class = "pull-right">
+									<button type="button" class="replyUpdateBtn ui submit yellow button" data-rno="${replyList.rno}">수정</button>
+									<button type="button" class="replyDeleteBtn ui submit red button" data-rno="${replyList.rno}">삭제</button>
+								</div>
+								</c:if>
+								<div class = "pull-left" style = "position:absolute; margin-left: 3em; margin-top:1em;">${replyList.content}</div>
+								 
+							</div>
+								<hr>
+							
+							
 							</li>
 						</c:forEach>   
 					</ol>
 				</div>
-				
+				<br>
+				<hr class = "devider2">
+				<c:if test="${member.userId != null}">
+				<div>
 				<form name="replyForm" method="post" class="form-horizontal">
 					<input type="hidden" id="bno" name="bno" value="${read.bno}" />
+					<input type="hidden" id="writer" name="writer" value="${member.userId}" />
 					<input type="hidden" id="page" name="page" value="${scri.page}"> 
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 					<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 				
-					<div class="form-group">
-						<label for="writer" class="col-sm-2 control-label">댓글작성자</label>
-						<div class="col-sm-10">
-							<input type="text" id="writer" name="writer" class="form-control" />
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="content" class="col-sm-2 control-label">댓글내용</label>
-						<div class="col-sm-10">
-							<input type="text" id="content" name="content" class="form-control"/>
-						</div>
-					</div>
+				
+				 <div id="reply" style = "height:5em;">
+				 <label class = "pull-left" style = "margin-bottom:1em; margin-right:2.5em; margin-left:3em;">댓글작성자</label> <label class = "pull-left" for="content">댓글내용</label> <br>
+				 <input readonly class = "ui input pull-left" style = "text-align:center; width:5em; height:2.3em; line-height: 1.8em; margin-top:1.3em; margin-left:-11.3em; "value = "${member.userId}" >
+				 <input type="text" id="content" name="content" class="form-control pull-right" style = "width:55em; margin-right:6em; margin-top:0.2em;"/>
+				 
+				 </div>
+				
 					
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="button" class="replyWriteBtn btn btn-success">작성</button>
+							<button type="button" class="replyWriteBtn ui submit teal button pull-right" style = "margin-top:1em; margin-right:6em;">작성</button>
 						</div>
 					</div>
-				</form> -->
+				</form> 
+				</div>
+				</c:if>
+						</div>
 						</div>
 			</section>
 			</div>

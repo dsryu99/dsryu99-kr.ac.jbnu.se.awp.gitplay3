@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Login</title>
+<title>로그인</title>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -93,6 +93,7 @@ body>.grid {
 				<div>
 				<i class="fas fa-tint"></i><br>
 				<h2 class="title">지정 헌혈 게시판</h2>
+				<h2 class="title" style = "margin-top:-0.3em; font-size:3em;">대 피 소</h2>
 				<div class="ui stacked segment">
 					<p id="memberMsg">${member.userId}님 환영합니다.</p>
 					<button class="ui fluid large red submit button" id="boardBtn">게시판</button><p></p>
@@ -106,6 +107,7 @@ body>.grid {
 			<c:otherwise>
 			<i class="fas fa-tint"></i>
 			<h2 class="title">지정 헌혈 게시판</h2>
+			<h2 class="title" style = "margin-top:-0.3em; font-size:3em;">대 피 소</h2>
 			
 			<form class="ui large form" name='homeForm' id="loginForm"
 				method="post" action="/member/login">
