@@ -211,10 +211,10 @@ input:checked+label {
 												<label class="donationtype" for="bloodtype1">전혈</label>
 												
 												<input type='radio' name='donationtype' value='성분채혈 혈소판' id="bloodtype2" class="visually-hidden" />
-												<label class="donationtype" for="bloodtype2">성분채혈</label>
+												<label class="donationtype" for="bloodtype2">성분채혈혈소판</label>
 												
 												<input type='radio' name='donationtype' value='성분채혈 백혈구' id="bloodtype3" class="visually-hidden" />
-												<label class="donationtype" for="bloodtype3">성분채혈</label>
+												<label class="donationtype" for="bloodtype3">성분채혈백혈구</label>
 												</div> <br>
 												<div style = "text-align:center">
 												<input type='radio' name='donationtype' value='농축적혈구' id="bloodtype4" class="visually-hidden"/>
