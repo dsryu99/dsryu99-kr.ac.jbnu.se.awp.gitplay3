@@ -23,6 +23,7 @@
 
 <style type="text/css">
 body {
+
 	background-color: #DADADA;
 }
 
@@ -56,11 +57,8 @@ body>.grid {
 	margin-right:1rem;
 	
 }
-#logoutBtn, #memberUpdateBtn, #login_btn {
+#logoutBtn, #memberUpdateBtn, #login_btn, #boardBtn, #memberdeleteBtn {
 	background-color:#F43F36;
-}
-#title {
-
 }
 </style>
 </head>

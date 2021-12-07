@@ -30,7 +30,7 @@
 			<hr />
 			 
 			<div>
-				<%@include file="/WEB-INF/views/nav/nav.jsp" %>
+				<%@include file="/WEB-INF/views/nav/navBoard.jsp" %>
 			</div>
 			<hr />
 			

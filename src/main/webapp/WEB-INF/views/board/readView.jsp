@@ -10,6 +10,73 @@
 	 	
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	 	
+	 	<!-- css 가져오기 -->
+<link rel="stylesheet" type="text/css"
+	href="/resources/semantic.min.css">
+
+<!-- icon 가져오기 Font awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+<style type="text/css">
+
+		#body {
+			background-color: #DADADA;
+		}
+		
+		#nav {
+			z-index: 1000;
+		}
+		
+		body>.grid {
+			height:100%;
+		}
+		
+		.image {
+			margin-top: -100px;
+		}
+		
+		.column {
+			max-width: 1050px;
+		}
+		
+		.view_btn {
+			cursor: pointer;
+		}
+		
+		#titleLogo {
+			margin-left: 5rem;
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+		}
+		
+		h1 {
+			color: red;
+		}
+				
+		.bloodtype {
+			margin-left: 1em;
+			margin-right: 1em;
+			width: 2em;
+			height: 2em;
+			border-radius: 50%;
+			font-size: 2em;
+			text-align: center;
+			line-height: 1.9em;
+			border: 2px solid red;
+			color: red;
+			font-weight: lighter;
+		}
+
+		#title {
+			width: 50rem;
+			height: 2em;
+
+	}
+
+</style>
+	 	
+	 	
 	 	<title>게시판</title>
 	</head>
 	
@@ -19,14 +86,14 @@
 			var formObj = $("form[name='readForm']");
 			
 			// 수정 
-			$(".update_btn").on("click", function(){
+			$("#update_btn").on("click", function(){
 				formObj.attr("action", "/board/updateView");
 				formObj.attr("method", "get");
 				formObj.submit();				
 			});
 			
 			// 삭제
-			$(".delete_btn").on("click", function(){
+			$("#delete_btn").on("click", function(){
 				var deleteYN = confirm("삭제하시겠습니까?");
 				if(deleteYN == true){	
 					formObj.attr("action", "/board/delete");
@@ -36,7 +103,7 @@
 			});
 			
 			//예약
-			$(".reservation_btn").on("click", function(){
+			$("#reservation_btn").on("click", function(){
 				var resYN = confirm("예약하시겠습니까?");
 				if(resYN == true){
 					formObj.attr("action", "/reservation/write");
@@ -46,7 +113,7 @@
 			});
 			
 			// 목록
-			$(".list_btn").on("click", function(){
+			$("#list_btn").on("click", function(){
 				location.href = "/board/list?page=${scri.page}"
 						      +"&perPageNum=${scri.perPageNum}"
 						      +"&searchType=${scri.searchType}&keyword=${scri.keyword}";
@@ -81,18 +148,28 @@
 		})
 	</script>
 	
-	<body>
-		<div class="container">
-			<header>
-				<h1> 게시판</h1>
+	<body id="body">
+	
+	
+		
+			<div class="container">
+			<header id="titleLogo">
+				<h1 style="font-size: 3em;">
+					<i class="fas fa-tint"></i> 대피소
+				</h1>
 			</header>
-			<hr />
-			 
-			<div>
-				<%@include file="/WEB-INF/views/nav/nav.jsp" %>
 			</div>
 			
-			<section id="container">
+			 
+			<div>
+				<%@include file="/WEB-INF/views/nav/navBoard.jsp" %>
+			</div>
+			
+			<div class="ui middle aligned center aligned grid">
+					<div class="column">
+					<section id="container">
+					<div class="ui stacked segment" style="height: 150em; margin-top:3em;">
+			
 				<form name="readForm" role="form" method="post">
 					<input type="hidden" id="userId" name="userId" value="${member.userId}" />
 					<input type="hidden" id="bno" name="bno" value="${read.bno}" />
@@ -112,11 +189,69 @@
 					<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 				</form>
+				<div >
+					
+					<br><label style = "font-size:2em; margin-left:1em;" class = "pull-left">${read.title}</label><br>
+					
+					<br><div class = "pull-left" style = "margin-left:3em;">
+						<label style = "padding-right: 10px; border-right:2px solid #d2d2d2;">${read.writer}</label>
+						<label style = "margin-left:0.3em; margin-right:0.2em;" for="regdate">작성날짜:</label>
+						<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd" />	
+					</div>
+					<br><hr>
+					<div style = " height: 30em;">
+						<div class = "pull-left" style = "margin-left:3em; font-size:1.2em; ">
+							${read.content}
+						</div>
+					
+					</div>
+					<hr>
+					<br>
+					<div class = "pull-left" style = "text-align:left; margin-left:6em; font-size:1.2em; width:25em; border-right: 2px solid #F2F2F2;">
+					
+						<div style = "margin-bottom:1em;">환자성명: ${read.patientName} (환자등록번호: ${read.patientNum})</div>
 				
-				<div class="form-group">
-					<label for="title" class="col-sm-2 control-label">제목</label>
-					<input type="text" id="title" name="title" class="form-control" value="${read.title}" readonly="readonly" />
+						<div style = "margin-bottom:1em;">의료기관: ${read.hospital} (병실호수: ${read.roomNum})</div>
+						
+						<div style = "margin-bottom:1em;">필요날짜: ${read.resDate}</div>
+						
+						<div style = "margin-bottom:1em;">필요수량: ${read.amount}</div>
+						
+						<div style = "margin-bottom:1em;">연락처: ${read.cellNum}</div>
+						
+						
+					</div>
+					
+					<div style = " height: 15em;">
+					<div class = "pull-right" style = "text-align: center; margin-right:12em; font-size:1.2em; ">
+					
+						<label style = "margin-bottom:1em;">필요 혈액 <br></label>
+					
+						<br><label style = "margin-bottom:1em;" class="bloodtype">${read.bloodtype}</label>
+						<br><label style = "margin-bottom:1em;"> ${read.donationtype}</label>
+					</div>
+					</div>
+					<hr>
+					
+					<div class = "pull-right" style = " margin-right:3em;">
+					<c:if test="${member.userId != null}">
+						<c:if test="${member.userId == read.writer}">
+							<button type="button" id = "update_btn" class="ui submit yellow button">수정</button>
+							<button type="button" id = "delete_btn" class="ui submit red button">삭제</button>
+							<button type="button" id = "list_btn" class="ui submit blue button">목록</button>
+						</c:if>
+						<c:if test="${member.userId != read.writer}">
+							<button type="button" id = "list_btn" class="ui submit blue button">목록</button>
+							<button type="button" id = "reservation_btn" class="ui submit green button">예약</button>
+						</c:if>
+					</c:if>
 				</div>
+					
+							
+				</div>
+				
+				<!-- 
+				
 				<div class="form-group">
 					<label for="bloodtype" class="col-sm-2 control-label">필요혈액</label>
 					<input type="text" id="bloodtype" name="bloodtype" class="form-control" value="${read.bloodtype} ${read.donationtype}" readonly="readonly" >
@@ -157,26 +292,28 @@
 				<div class="form-group">
 					<label for="regdate" class="col-sm-2 control-label">작성날짜</label>
 					<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd" />	
-				</div>
+				</div> -->
+					
+					
 								
-				<div>
-				
-				<c:if test="${member.userId != null}">
-					<c:if test="${member.userId == read.writer}">
-						<button type="button" class="update_btn btn btn-warning">수정</button>
-						<button type="button" class="delete_btn btn btn-danger">삭제</button>
-						<button type="button" class="list_btn btn btn-primary">목록</button>
+			<!--<div>
+					<c:if test="${member.userId != null}">
+						<c:if test="${member.userId == read.writer}">
+							<button type="button" class="update_btn btn btn-warning">수정</button>
+							<button type="button" class="delete_btn btn btn-danger">삭제</button>
+							<button type="button" class="list_btn btn btn-primary">목록</button>
+						</c:if>
+						<c:if test="${member.userId != read.writer}">
+							<button type="button" class="list_btn btn btn-primary">목록</button>
+							<button type="button" class="reservation_btn btn btn-success">예약</button>
+						</c:if>
 					</c:if>
-					<c:if test="${member.userId != read.writer}">
-						<button type="button" class="list_btn btn btn-primary">목록</button>
-						<button type="button" class="reservation_btn btn btn-success">예약</button>
-					</c:if>
-				</c:if>
-				
 				</div>
+				  -->	
+				
 				
 				<!-- 댓글 -->
-				<div id="reply">
+				<!--  <div id="reply">
 					<ol class="replyList">
 						<c:forEach items="${replyList}" var="replyList">
 							<li>
@@ -221,9 +358,12 @@
 							<button type="button" class="replyWriteBtn btn btn-success">작성</button>
 						</div>
 					</div>
-				</form>
+				</form> -->
+						</div>
 			</section>
-			<hr />
-		</div>
+			</div>
+			</div>
+	
+
 	</body>
 </html>
